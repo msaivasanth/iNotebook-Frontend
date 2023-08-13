@@ -8,7 +8,7 @@ const SignUp = (props) => {
   const handleSubmit = async (e) => {
       e.preventDefault();
       let {name, email, password} = credentials
-      const response = await fetch("https://i-notebook-backend-six.vercel.app/api/auth/createuser", {
+      const response = await fetch("https://happy-tick-outfit.cyclic.app/api/auth/createuser", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
