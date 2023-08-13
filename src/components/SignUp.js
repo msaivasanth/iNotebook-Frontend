@@ -24,7 +24,8 @@ const SignUp = (props) => {
           props.showAlert("Signed in successfully", "success")
         }
         else {
-          props.showAlert("Wrong Credentials", "danger")
+          // props.showAlert("Wrong Credentials", "danger")
+          props.showAlert("Username and Password must be atleast 5 characters to SignUp", "danger")
         }
       //   setCredentials({email: "", password:""})
 
