@@ -41,7 +41,7 @@ const SignUp = (props) => {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Name</label>
-          <input type="text" className="form-control" id="name" name='name' value={credentials.name} onChange={onChange} aria-describedby="emailHelp"/>\
+          <input type="text" className="form-control" id="name" name='name' value={credentials.name} onChange={onChange} aria-describedby="emailHelp"/>
           <div id="passwordHelpBlock" className="form-text">
             Your username must be  atleast 5 characters long.
           </div>
