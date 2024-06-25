@@ -2,10 +2,11 @@ import { useState } from "react";
 import noteContext from "./noteContext";
 
 const NoteState = (props) => {
-  const host = "https://i-notebook-backend-six.vercel.app/"
+  const host = "https://inotebook-backend-27lo.onrender.com"
   const notesInitial = []
 
   const [notes, setNotes] = useState(notesInitial);
+  const [user, setUser] = useState([]);
   //Fetch
   const getNotes = async () => {
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
@@ -65,7 +66,7 @@ const editNote = async (id, title, description, tags) => {
     body: JSON.stringify({id, title, description, tags}), // body data type must match "Content-Type" header
   });
   const json = await response.json();
-  // console.log(json)
+  console.log(json)
   let newNotes = JSON.parse(JSON.stringify(notes))
   for (let index = 0; index < newNotes.length; index++) {
     const element = newNotes[index];
@@ -80,8 +81,24 @@ const editNote = async (id, title, description, tags) => {
   console.log(newNotes)
   setNotes(newNotes)
 }
+
+  // get user details
+  const getUser = async () => {
+    const response = await fetch(`${host}/api/auth/getuser`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "authToken": localStorage.getItem('token'),
+      },
+    });
+    const json = await response.json();
+    // console.log(json)
+    setUser(json)
+    
+  }
+
 return (
-  <noteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>
+  <noteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes, getUser, user }}>
     {props.children}
   </noteContext.Provider>
 )

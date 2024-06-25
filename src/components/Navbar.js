@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useHistory, useLocation } from "react-router-dom";
+import noteContext from '../context/notes/noteContext';
 function Navbar() {
     let location = useLocation();
+    const context = useContext(noteContext)
+    const {user, getUser} = context
     let history = useHistory();
     useEffect(() => {
         // console.log(location.pathname);
+        getUser()
+        // eslint-disable-next-line
       }, [location]);
 
     const handleLogout =() => {
         localStorage.removeItem('token');
         history.push('/login')
+    }
+    const handleUser = () => {
+        history.push('/user')
     }
     return (
         <nav className="navbar navbar-expand-lg  navbar-dark bg-dark">
@@ -32,7 +40,9 @@ function Navbar() {
                     {!localStorage.getItem('token') ? <div className="d-flex">
                         <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
                         <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp</Link>
-                    </div>: <div onClick={handleLogout} className='btn btn-primary mx-1'>LogOut</div>}
+                    </div>: <div><div onClick={handleLogout} className='btn btn-primary mx-1'>LogOut</div>
+                            <div className='btn btn-primary mx-1' onClick={handleUser}>{user.name}</div>
+                    </div>}
                 </div>
             </div>
         </nav>

@@ -11,11 +11,13 @@ import NoteState from './context/notes/NoteState';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Alert from './components/Alert';
-import { useState } from 'react';
+import {  useEffect, useState } from 'react';
+import UserDetails from './components/UserDetails';
 
 function App() {
   
   const [alert, setAlert] = useState();
+
   const showAlert = (message, type) => {
     setAlert({
       msg: message,
@@ -25,6 +27,7 @@ function App() {
       setAlert(null)
     }, 1500)
   }
+  
   return (
     <>
       <NoteState>
@@ -47,6 +50,10 @@ function App() {
 
               <Route exact path="/signup">
                 <SignUp showAlert={showAlert} />
+              </Route>
+
+              <Route exact path="/user">
+                <UserDetails />
               </Route>
 
             </Switch>
